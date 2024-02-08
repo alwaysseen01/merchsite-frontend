@@ -1,11 +1,10 @@
 import "./header.css";
 import Navbar from "../navigation/navigation";
-import logoImage from "../../public/merchLogo.png"
 
 const Header = () => {
     return (
         <header className="headerBox">
-            <img src={logoImage} className="logoImage" alt=""></img>
+            <img src="merchLogo.png" className="logoImage" alt=""></img>
             <Navbar />
         </header>
     );
