@@ -1,0 +1,15 @@
+@use "../app/app.scss";
+
+.headerBox {
+    display: flex;;
+    flex-direction: row;
+    padding: 20px;
+}
+
+.logoImage {
+    position: absolute;
+    width: 150px;
+    height: 100px;
+    object-fit: cover;
+    flex-basis: 10%;
+}

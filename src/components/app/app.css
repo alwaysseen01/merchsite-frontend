@@ -1,0 +1,11 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,500;1,300&display=swap");
+html, body {
+  margin: 0;
+  padding: 0;
+}
+html .App, body .App {
+  min-height: 100vh;
+  background-color: #202020;
+}
+
+/*# sourceMappingURL=app.css.map */
