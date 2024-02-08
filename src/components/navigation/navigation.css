@@ -14,6 +14,11 @@ html, body {
   width: max-content;
   margin-left: auto;
   margin-right: auto;
+  z-index: 1;
+}
+.navbar a {
+  text-decoration: none !important;
+  color: inherit;
 }
 .navbar .navbar__element {
   list-style: none;

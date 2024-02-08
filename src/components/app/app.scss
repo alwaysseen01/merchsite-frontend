@@ -8,9 +8,6 @@ $basic-font-family: 'IBM Plex Sans', sans-serif;
 html, body {
     margin: 0;
     padding: 0;
-
-    .App {
-        min-height: 100vh;
-        background-color: $dark-background-color;
-    }
+    min-height: 100vh;
+    background-color: $dark-background-color;
 }
