@@ -1,6 +1,6 @@
 import './app.css';
 import React from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import Header from '../header/header';
 import Main from '../main/main';
 
@@ -17,6 +17,7 @@ const App = () => {
           <Route path="/pants" component="" />
           <Route path="/shirts" component="" />
           <Route path="/hats" component="" />
+          <Route path="/" element={<Navigate to="/t-shirts" />} />
         </Routes>
       </Main>
     </BrowserRouter>

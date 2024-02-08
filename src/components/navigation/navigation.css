@@ -50,5 +50,16 @@ html, body {
   background-color: #fdfdff;
   transition: width 0.5s;
 }
+.navbar .navbar__element.active:after {
+  content: "";
+  width: 100%;
+  display: block;
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  height: 2px;
+  background-color: #fdfdff;
+  transition: width 0.5s;
+}
 
 /*# sourceMappingURL=navigation.css.map */

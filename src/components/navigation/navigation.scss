@@ -48,5 +48,17 @@
             background-color: app.$light-background-color;
             transition: width 0.5s;
         }
+
+        &.active:after {
+            content: "";
+            width: 100%;
+            display: block;
+            position: absolute;
+            left: 0;
+            bottom: -3px;
+            height: 2px;
+            background-color: app.$light-background-color;
+            transition: width 0.5s;
+        }
     }
 }
