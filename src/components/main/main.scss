@@ -1,0 +1,14 @@
+@use "../app/app.scss";
+
+.mainBox {
+    padding: 40px 40px;
+    min-height: 82.6vh;
+    max-width: 89.5vw;
+
+    .itemsWrapper {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        column-gap: 7.5vw;
+        row-gap: 2.2vw;
+    }
+}

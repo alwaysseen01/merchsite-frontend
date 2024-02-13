@@ -1,0 +1,21 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,500;1,300&display=swap");
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  background-color: #202020;
+}
+
+.mainBox {
+  padding: 40px 40px;
+  min-height: 82.6vh;
+  max-width: 89.5vw;
+}
+.mainBox .itemsWrapper {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  column-gap: 7.5vw;
+  row-gap: 2.2vw;
+}
+
+/*# sourceMappingURL=main.css.map */

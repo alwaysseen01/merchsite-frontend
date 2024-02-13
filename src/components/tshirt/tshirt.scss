@@ -1,0 +1,37 @@
+@use "../app/app.scss";
+
+.itemBox {
+    position: relative;
+    background-color: app.$light-background-color;
+    border: 1px solid app.$light-background-color;
+    border-radius: 20px 5px 5px 5px;
+    min-width: max-content;
+    font-family: app.$basic-font-family;
+
+    .itemPrice {
+        margin: 0;
+        padding: 10px 40px;
+        position: absolute;
+        margin-right: auto;
+        margin-bottom: auto;
+        background-color: app.$light-background-color;
+        border-top-left-radius: 15px;
+        border-bottom-right-radius: 15px;
+        font-weight: 600;
+    }
+
+    .itemPhoto {
+        object-fit: cover;
+        padding: 60px;
+        width: 200px;
+        height: 250px;
+        border-radius: 5px;
+        background: app.$dark-background-color;
+    }
+
+    .itemName {
+        margin: 0;
+        padding: 10px;
+        text-align: center;
+    }
+}
