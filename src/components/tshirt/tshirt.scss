@@ -1,10 +1,13 @@
 @use "../app/app.scss";
 
 .itemBox {
+    display: grid;
+    flex-direction: column;
     position: relative;
-    background-color: app.$light-background-color;
+    background-color: app.$dark-background-color;
     border: 1px solid app.$light-background-color;
     border-radius: 20px 5px 5px 5px;
+    flex-grow: 1;
     min-width: max-content;
     font-family: app.$basic-font-family;
 
@@ -27,11 +30,14 @@
         height: 250px;
         border-radius: 5px;
         background: app.$dark-background-color;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     .itemName {
         margin: 0;
         padding: 10px;
         text-align: center;
+        background-color: app.$light-background-color;
     }
 }
