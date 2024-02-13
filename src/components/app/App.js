@@ -17,7 +17,7 @@ const App = () => {
           <Route path="/pants" component="" />
           <Route path="/shirts" component="" />
           <Route path="/hats" component="" />
-          <Route path="/" element={<Navigate to="/t-shirts" />} />
+          <Route path="*" element={<Navigate to="/t-shirts" />} />
         </Routes>
       </Main>
     </BrowserRouter>
