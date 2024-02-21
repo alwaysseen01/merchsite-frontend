@@ -1,12 +1,12 @@
 import "./main.css";
 import { Route, Routes, Navigate } from "react-router-dom";
-import TshirtBox from "../tshirtBox/tshirtBox";
+import ItemsBox from '../itemsBox/itemsBox'
 
 const Main = () => {
     return (
         <main className="mainBox">
             <Routes>
-                <Route path="/t-shirts" element={<TshirtBox />} />
+                <Route path="/t-shirts" element={<ItemsBox />} />
                 <Route path="/sweatshirts" element="" />
                 <Route path="/hoodie" element="" />
                 <Route path="/backpacks" element="" />
