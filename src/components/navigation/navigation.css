@@ -63,4 +63,31 @@ html, body {
   height: 2px;
   background-color: #fdfdff;
   transition: width 0.5s;
+}
+@keyframes loading-gradient {
+  0% {
+    background-position: 0% 0%;
+  }
+  50% {
+    background-position: 100% 100%;
+  }
+  100% {
+    background-position: 0% 0%;
+  }
+}
+.navbar .navbar__loading_element {
+  list-style: none;
+  background: linear-gradient(-45deg, black, #fdfdff);
+  background-size: 400% 400%;
+  animation: loading-gradient 3s infinite linear;
+  border-radius: 5px;
+  height: 30px;
+  width: 110px;
+}
+
+.categoryLoadingText {
+  font-family: "IBM Plex Sans", sans-serif;
+  color: #fdfdff;
+  margin-left: auto;
+  margin-right: auto;
 }/*# sourceMappingURL=navigation.css.map */

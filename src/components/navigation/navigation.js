@@ -1,20 +1,36 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, useLocation } from "react-router-dom";
 import './navigation.css';
+import CategoryContext from "../../contexts/categoryContext";
 
 const Navbar = () => {
-    let location = useLocation();
+  let location = useLocation();
+  const context = useContext(CategoryContext);
+
+  if (!context || context.loading) {
     return (
       <ul className="navbar">
-          <Link to="/t-shirts" className={`navbar__element ${location.pathname === "/t-shirts" ? "active" : ""}`}><li>T-SHIRTS</li></Link>
-          <Link to="/sweatshirts" className={`navbar__element ${location.pathname === "/sweatshirts" ? "active" : ""}`}><li>SWEATSHIRTS</li></Link>
-          <Link to="/hoodie" className={`navbar__element ${location.pathname === "/hoodie" ? "active" : ""}`}><li>HOODIE</li></Link>
-          <Link to="/backpacks" className={`navbar__element ${location.pathname === "/backpacks" ? "active" : ""}`}><li>BACKPACKS</li></Link>
-          <Link to="/pants" className={`navbar__element ${location.pathname === "/pants" ? "active" : ""}`}><li>PANTS</li></Link>
-          <Link to="/shirts" className={`navbar__element ${location.pathname === "/shirts" ? "active" : ""}`}><li>SHIRTS</li></Link>
-          <Link to="/hats" className={`navbar__element ${location.pathname === "/hats" ? "active" : ""}`}><li>HATS</li></Link>
+        <li className="navbar__loading_element"></li>
+        <li className="navbar__loading_element"></li>
+        <li className="navbar__loading_element"></li>
+        <li className="navbar__loading_element"></li>
+        <li className="navbar__loading_element"></li>
+        <li className="navbar__loading_element"></li>
+        <li className="navbar__loading_element"></li>
       </ul>
     );
-  };
+  }
+
+  const { categories } = context;
+
+  return (
+      <ul className="navbar">
+          {categories.map((category) => (
+              <Link to={`/${category.name}`} className={`navbar__element ${location.pathname === `/${category.name}` ? "active" : ""}`}><li>{category.name.toUpperCase()}</li></Link>
+          ))}
+      </ul>
+  );
+};
   
-  export default Navbar;
+export default Navbar;
+
