@@ -7,7 +7,7 @@ const ItemsBox = ({categoryId}) => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        fetch('http://localhost:8080/api/category/' + categoryId)
+        fetch('http://localhost:8080/api/item/category/' + categoryId)
         .then(response => {
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
@@ -15,11 +15,12 @@ const ItemsBox = ({categoryId}) => {
             return response.json();
         })
         .then(data => {
+            console.log(data);
             setItems(data);
             setLoading(false);
         })
         .catch(error => {
-            console.error('There was an error!', error);
+            console.error('An error occured while trying to get ITEMS BY CATEGORY!', error);
         });
     }, [categoryId]);
 

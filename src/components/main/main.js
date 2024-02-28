@@ -1,41 +1,24 @@
 import "./main.css";
-import React, { useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import ItemsBox from '../itemsBox/itemsBox';
 import CategoryContext from "../../contexts/categoryContext";
 
 const Main = () => {
-    const [categories, setCategories] = useState([]);
-    const [loading, setLoading] = useState(true);
-
-    useEffect(() => {
-        fetch('http://localhost:8080/api/category')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                return response.json();
-            })
-            .then(data => {
-                setCategories(data);
-                setLoading(false);
-            })
-            .catch(error => {
-                console.error('There was an error!', error);
-            });
-    }, []);
+    const { categories } = useContext(CategoryContext);
 
     return (
-        <CategoryContext.Provider value={{ categories, loading }}>
             <main className="mainBox">
                 <Routes>
-                    {categories.map((category) => (
-                        <Route path={`/${category.name}`} element={<ItemsBox categoryId={category.id} />} />
-                    ))}
-                    <Route path="*" element={<Navigate to={`/${categories[0]?.name}`} />} />
+                    {categories.length === 0 ? (
+                        <Route path="*" element={<Navigate to={`/t-shirts`} />} />
+                    ) : (
+                        categories.map((category) => (
+                            <Route path={`/${category.name}`} element={<ItemsBox categoryId={category.id} />} />
+                        ))
+                    )}
                 </Routes>
             </main>
-        </CategoryContext.Provider>
     );
 };
 

@@ -1,13 +1,13 @@
-import React, { useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link, useLocation } from "react-router-dom";
 import './navigation.css';
 import CategoryContext from "../../contexts/categoryContext";
 
 const Navbar = () => {
   let location = useLocation();
-  const context = useContext(CategoryContext);
+  const {categoriesLoading, categories} = useContext(CategoryContext)
 
-  if (!context || context.loading) {
+  if (categoriesLoading) {
     return (
       <ul className="navbar">
         <li className="navbar__loading_element"></li>
@@ -20,8 +20,6 @@ const Navbar = () => {
       </ul>
     );
   }
-
-  const { categories } = context;
 
   return (
       <ul className="navbar">
