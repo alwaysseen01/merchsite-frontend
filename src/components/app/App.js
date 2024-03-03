@@ -10,7 +10,7 @@ const App = () => {
   const [categoriesLoading, setCategoriesLoading] = useState(true);
 
   useEffect(() => {
-      fetch('http://localhost:8080/api/category')
+      fetch('http://159.89.21.118:8080/api/category')
             .then(response => {
                 if (!response.ok) {
                     throw new Error(`HTTP error! status: ${response.status}`);

@@ -1,6 +1,6 @@
 import "./main.css";
 import React, { useContext } from 'react';
-import { Route, Routes, Navigate } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import ItemsBox from '../itemsBox/itemsBox';
 import CategoryContext from "../../contexts/categoryContext";
 
@@ -11,12 +11,15 @@ const Main = () => {
             <main className="mainBox">
                 <Routes>
                     {categories.length === 0 ? (
-                        <Route path="*" element={<Navigate to={`/t-shirts`} />} />
+                        <>
+                            <Route path="*" element={<ItemsBox categoryId={"default"} />} />
+                        </>
                     ) : (
                         categories.map((category) => (
                             <Route path={`/${category.name}`} element={<ItemsBox categoryId={category.id} />} />
                         ))
                     )}
+                    <Route path="*" element={<Navigate to="t-shirts"/>} />
                 </Routes>
             </main>
     );
