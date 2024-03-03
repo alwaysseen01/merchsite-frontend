@@ -8,12 +8,11 @@ html, body {
 
 .itemsWrapper {
   width: 100%;
-  display: flex;
-  flex-direction: row;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(310px, 1fr));
   gap: 30px;
-  flex-wrap: wrap;
+  justify-items: center;
   padding: 0;
-  justify-content: center;
   margin: 0;
 }
 
@@ -28,20 +27,6 @@ html, body {
     background-position: 0% 0%;
   }
 }
-.itemLoadingBox {
-  display: block;
-  border-radius: 3px;
-  position: relative;
-  background: linear-gradient(-45deg, black, #fdfdff);
-  background-size: 400% 400%;
-  animation: loading-gradient 3s infinite linear;
-  margin: 0 20px 20px 0;
-  text-decoration: none;
-  color: #474747;
-  z-index: 0;
-  height: 300px;
-}
-
 .itemLoadingBox {
   position: relative;
   min-width: 200px;
