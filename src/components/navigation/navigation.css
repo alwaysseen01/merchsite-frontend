@@ -65,6 +65,16 @@ html, body {
   background-color: #fdfdff;
   transition: width 0.5s;
 }
+.navbar .navbar__element.cartPage {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  align-items: center;
+}
+.navbar .navbar__element.cartPage li {
+  height: -moz-max-content;
+  height: max-content;
+}
 @keyframes loading-gradient {
   0% {
     background-position: 0% 0%;
@@ -84,6 +94,11 @@ html, body {
   border-radius: 5px;
   height: 30px;
   width: 110px;
+}
+.navbar .cartIcon {
+  width: 20px;
+  height: 20px;
+  padding: 0;
 }
 
 .categoryLoadingText {

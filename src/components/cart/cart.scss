@@ -1,0 +1,24 @@
+@use "../app/app.scss";
+
+.cartPageBox {
+    display: flex;
+    flex-direction: column;
+    row-gap: 30px;
+    font-family: app.$basic-font-family;
+    color: app.$basic-font-color;
+    padding: 20px 0px 20px 0px;
+}
+
+.userDetailsBox {
+    padding: 0;
+
+    ul {
+        padding: 0;
+    }
+
+    li {
+        list-style: none;
+        font-size: 24px;
+        color: grey;
+    }
+}
