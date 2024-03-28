@@ -53,6 +53,9 @@ const ItemDetails = () => {
             setCount(0);
             window.alert("You've entered a wrong number or number more than available quantity. Please change.");
         }
+
+        const itemData = JSON.stringify({ item, count });
+        localStorage.setItem(item.id, itemData);
     };      
 
     useEffect(() => {
