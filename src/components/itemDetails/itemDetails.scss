@@ -57,6 +57,8 @@
                     .itemCountMinus {
                         padding: 5px 15px;
                         transition: all 0.2s ease-in-out;
+                        display: flex;
+                        align-items: center;
     
                         &:hover {
                             cursor: pointer;
@@ -65,14 +67,26 @@
                     }
     
                     .itemCountStatus {
+                        min-width: 2ch;
+                        max-width: 4ch !important;
+                        width: min-content;
                         padding: 5px 15px;
                         color: app.$dark-font-color !important;
                         background-color: white;
+                        text-align: center;
+                        font-size: 24px;
+                        border: 0px;
+
+                        &::-webkit-inner-spin-button {
+                            display: none !important;
+                        }
                     }
     
                     .itemCountPlus {
                         padding: 5px 12px 7px 12px;
                         transition: all 0.2s ease-in-out;
+                        display: flex;
+                        align-items: center;
 
                         &:hover {
                             cursor: pointer;
@@ -95,7 +109,31 @@
                         transform: scale(1.05);
                         cursor: pointer;
                     }
-                }
+
+                    &.active::after {
+                        content: "";
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        background-color: #fff;
+                        opacity: 1;
+                        animation: fly-to-cart 1s ease-in-out;
+                    }
+
+                    @keyframes fly-to-cart {
+                        0% {
+                          top: 0;
+                          left: 0;
+                          opacity: 1;
+                        }
+                        100% {
+                          top: -100px;
+                          opacity: 0;
+                        }
+                      }
+                }    
             }
         }
     }
@@ -117,4 +155,10 @@
             }
         }
     }
+}
+
+.flyingCount {
+    font-size: 48px;
+    font-family: app.$basic-font-family;
+    color: app.$basic-font-color;
 }

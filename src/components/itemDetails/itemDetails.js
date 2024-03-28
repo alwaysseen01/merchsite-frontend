@@ -1,24 +1,59 @@
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import '../itemDetails/itemDetails.scss'
+import '../itemDetails/itemDetails.scss';
+import { type } from "@testing-library/user-event/dist/type";
 
 const ItemDetails = () => {
     const { openedItemId } = useParams();
     const [item, setItem] = useState({});
     const [count, setCount] = useState(0);
+    const [isAdding, setIsAdding] = useState(false);
 
     const handleMinusClick = () => {
         if (count > 0) {
             setCount(count - 1);
         }
     }
-
+    
     const handlePlusClick = () => {
         if (count < item.quantity) {
             setCount(count + 1);
         }
     }
 
+    const handleAddToCart = () => {
+        if (count > 0 && count <= item.quantity) {
+            const element = document.querySelector('.addToCartButton');
+            const cartIcon = document.querySelector('.navbar__element.cartPage');
+    
+            const flyingCount = document.createElement('div');
+            flyingCount.className = 'flyingCount';
+            flyingCount.textContent = `+${count}`;
+            document.body.appendChild(flyingCount);
+        
+            const offset = element.getBoundingClientRect();
+            const cartOffset = cartIcon.getBoundingClientRect();
+        
+            flyingCount.style.position = 'absolute';
+            flyingCount.style.top = (window.pageYOffset + offset.top) + 'px';
+            flyingCount.style.left = (window.pageXOffset + offset.left) + 'px';
+        
+            const animation = flyingCount.animate({
+            top: (window.pageYOffset + cartOffset.top) + 'px',
+            left: (window.pageXOffset + cartOffset.left) + 'px',
+            opacity: 0,
+            }, 1700);
+    
+            setCount(0);
+        
+            animation.onfinish = () => {
+                flyingCount.remove();
+            };
+        } else {
+            setCount(0);
+            window.alert("You've entered a wrong number or number more than available quantity. Please change.");
+        }
+    };      
 
     useEffect(() => {
         fetch('http://159.89.21.118:8080/api/item/id/' + openedItemId)
@@ -34,6 +69,9 @@ const ItemDetails = () => {
         .catch(error => {
             console.error('An error occured while trying to get ITEM BY ID!', error);
         });
+
+        const itemQuantityFromDB = document.querySelector('.itemAvailableQuantity');
+        itemQuantityFromDB.value = `Available quantity: ${item.quantity}`
     }, [openedItemId])
 
     return (
@@ -60,10 +98,21 @@ const ItemDetails = () => {
                     <div className="itemCartBox">
                         <div className="itemCartCountWrapper">
                             <div className="itemCountMinus" onClick={handleMinusClick}>-</div>
-                            <div className="itemCountStatus">{count}</div>
+                            <input 
+                                className="itemCountStatus" 
+                                value={count} 
+                                onChange={(e) => setCount(e.target.value ? parseInt(e.target.value) : '')}
+                                onFocus={(e) => {if (e.target.value === '0') e.target.value = '';}}
+                                onBlur={(e) => {if (e.target.value === '') e.target.value = '0';}}
+                                type="number" 
+                                min="0" 
+                                max={item.quantity} 
+                            />
                             <div className="itemCountPlus" onClick={handlePlusClick}>+</div>
                         </div>
-                        <button className="addToCartButton">ADD TO CART</button>
+                        <button className="addToCartButton" onClick={handleAddToCart} disabled={isAdding}>
+                            ADD TO CART
+                        </button>
                     </div>
                 </div>
             </div>
