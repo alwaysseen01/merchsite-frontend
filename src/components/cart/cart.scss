@@ -7,18 +7,77 @@
     font-family: app.$basic-font-family;
     color: app.$basic-font-color;
     padding: 20px 0px 20px 0px;
-}
 
-.userDetailsBox {
-    padding: 0;
-
-    ul {
+    .userDetailsBox {
         padding: 0;
+    
+        ul {
+            padding: 0;
+        }
+    
+        li {
+            list-style: none;
+            font-size: 24px;
+            color: grey;
+        }
     }
 
-    li {
-        list-style: none;
-        font-size: 24px;
-        color: grey;
+    .itemPrice {
+        color: app.$dark-font-color !important;
+    }
+
+    .cartItemInfoWrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        .cartItemQuantity {
+            margin-top: 30px;
+            margin-bottom: 0;
+        }
+
+        .cartItemCost {
+            margin-top: 10px;
+            margin-bottom: 0;
+            font-size: 24px;
+            color: green;
+        }
+    }
+
+    .cartMenuWrapper {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+
+        .clearCartButton {
+            padding: 10px 15px;
+            border: 2px solid red;
+            border-radius: 5px;
+            color: red;
+            font-family: app.$basic-font-family;
+            font-size: 22px;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .clearCartButton:hover {
+            cursor: pointer;
+            transform: scale(1.05);
+        }
+
+        .orderNowButton {
+            padding: 10px 15px;
+            border: 2px solid green;
+            border-radius: 5px;
+            color:green ;
+            font-family: app.$basic-font-family;
+            font-size: 22px;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .orderNowButton:hover {
+            cursor: pointer;
+            transform: scale(1.05);
+        }
     }
 }

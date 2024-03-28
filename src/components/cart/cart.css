@@ -14,15 +14,64 @@ html, body {
   color: #fdfdff;
   padding: 20px 0px 20px 0px;
 }
-
-.userDetailsBox {
+.cartPageBox .userDetailsBox {
   padding: 0;
 }
-.userDetailsBox ul {
+.cartPageBox .userDetailsBox ul {
   padding: 0;
 }
-.userDetailsBox li {
+.cartPageBox .userDetailsBox li {
   list-style: none;
   font-size: 24px;
   color: grey;
+}
+.cartPageBox .itemPrice {
+  color: #202020 !important;
+}
+.cartPageBox .cartItemInfoWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.cartPageBox .cartItemInfoWrapper .cartItemQuantity {
+  margin-top: 30px;
+  margin-bottom: 0;
+}
+.cartPageBox .cartItemInfoWrapper .cartItemCost {
+  margin-top: 10px;
+  margin-bottom: 0;
+  font-size: 24px;
+  color: green;
+}
+.cartPageBox .cartMenuWrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+}
+.cartPageBox .cartMenuWrapper .clearCartButton {
+  padding: 10px 15px;
+  border: 2px solid red;
+  border-radius: 5px;
+  color: red;
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 22px;
+  transition: all 0.2s ease-in-out;
+}
+.cartPageBox .cartMenuWrapper .clearCartButton:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+}
+.cartPageBox .cartMenuWrapper .orderNowButton {
+  padding: 10px 15px;
+  border: 2px solid green;
+  border-radius: 5px;
+  color: green;
+  font-family: "IBM Plex Sans", sans-serif;
+  font-size: 22px;
+  transition: all 0.2s ease-in-out;
+}
+.cartPageBox .cartMenuWrapper .orderNowButton:hover {
+  cursor: pointer;
+  transform: scale(1.05);
 }/*# sourceMappingURL=cart.css.map */

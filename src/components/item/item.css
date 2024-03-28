@@ -43,6 +43,7 @@ html, body {
   margin: 0;
   padding: 10px;
   text-align: center;
+  color: #202020;
   background-color: #fdfdff;
 }
 .itemBox a {
