@@ -1,13 +1,16 @@
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import '../itemDetails/itemDetails.scss';
-import { type } from "@testing-library/user-event/dist/type";
+import AuthContext from "../../contexts/authContext";
 
 const ItemDetails = () => {
     const { openedItemId } = useParams();
     const [item, setItem] = useState({});
     const [count, setCount] = useState(0);
-    const [isAdding, setIsAdding] = useState(false);
+    const [isAdding] = useState(false);
+
+    const { isAuthenticated, setRedirectTo, redirectTo } = useContext(AuthContext);
+    const navigate = useNavigate();
 
     const handleMinusClick = () => {
         if (count > 0) {
@@ -23,40 +26,50 @@ const ItemDetails = () => {
 
     const handleAddToCart = () => {
         if (count > 0 && count <= item.quantity) {
-            const element = document.querySelector('.addToCartButton');
-            const cartIcon = document.querySelector('.navbar__element.cartPage');
+            if (isAuthenticated) {
+                console.log("AUTHENTICATED, proceed operation");
     
-            const flyingCount = document.createElement('div');
-            flyingCount.className = 'flyingCount';
-            flyingCount.textContent = `+${count}`;
-            document.body.appendChild(flyingCount);
-        
-            const offset = element.getBoundingClientRect();
-            const cartOffset = cartIcon.getBoundingClientRect();
-        
-            flyingCount.style.position = 'absolute';
-            flyingCount.style.top = (window.pageYOffset + offset.top) + 'px';
-            flyingCount.style.left = (window.pageXOffset + offset.left) + 'px';
-        
-            const animation = flyingCount.animate({
-            top: (window.pageYOffset + cartOffset.top) + 'px',
-            left: (window.pageXOffset + cartOffset.left) + 'px',
-            opacity: 0,
-            }, 1700);
+                const element = document.querySelector('.addToCartButton');
+                const cartIcon = document.querySelector('.navbar__element.cartPage');
     
-            setCount(0);
-        
-            animation.onfinish = () => {
-                flyingCount.remove();
-            };
+                const flyingCount = document.createElement('div');
+                flyingCount.className = 'flyingCount';
+                flyingCount.textContent = `+${count}`;
+                document.body.appendChild(flyingCount);
+    
+                const offset = element.getBoundingClientRect();
+                const cartOffset = cartIcon.getBoundingClientRect();
+    
+                flyingCount.style.position = 'absolute';
+                flyingCount.style.top = (window.pageYOffset + offset.top) + 'px';
+                flyingCount.style.left = (window.pageXOffset + offset.left) + 'px';
+    
+                const animation = flyingCount.animate({
+                    top: (window.pageYOffset + cartOffset.top) + 'px',
+                    left: (window.pageXOffset + cartOffset.left) + 'px',
+                    opacity: 0,
+                }, 1700);
+    
+                setCount(0);
+    
+                animation.onfinish = () => {
+                    flyingCount.remove();
+                };
+    
+                const itemData = JSON.stringify({ item, count });
+                localStorage.setItem(item.id, itemData);
+            } else {
+                console.log("NOT AUTHENTICATED, redirecting to --> '/login'");
+                setRedirectTo('/login');
+                if (redirectTo) {
+                    navigate(redirectTo);
+                }
+            }
         } else {
             setCount(0);
             window.alert("You've entered a wrong number or number more than available quantity. Please change.");
         }
-
-        const itemData = JSON.stringify({ item, count });
-        localStorage.setItem(item.id, itemData);
-    };      
+    };        
 
     useEffect(() => {
         fetch('http://159.89.21.118:8080/api/item/id/' + openedItemId)
@@ -75,7 +88,11 @@ const ItemDetails = () => {
 
         const itemQuantityFromDB = document.querySelector('.itemAvailableQuantity');
         itemQuantityFromDB.value = `Available quantity: ${item.quantity}`
-    }, [openedItemId])
+
+        if (redirectTo) {
+            navigate(redirectTo);
+        }
+    }, [item.quantity, navigate, openedItemId, redirectTo])
 
     return (
         <div className="itemDetailsWrapper">

@@ -1,25 +1,36 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import Item from '../item/item';
 import "../itemsBox/itemsBox.css"
 import "./cart.scss";
-import { color } from "framer-motion";
+import AuthContext from "../../contexts/authContext";
 
 const Cart = () => {
     const [cartItems, setCartItems] = useState([]);
     const [totalCost, setTotalCost] = useState(0);
+    const { isAuthenticated, setRedirectTo, redirectTo } = useContext(AuthContext);
+    const navigate = useNavigate();
 
     useEffect(() => {
-        let items = [];
-        let total = 0;
-        for (let i = 0; i < localStorage.length; i++) {
-            let key = localStorage.key(i);
-            let value = JSON.parse(localStorage.getItem(key));
-            items.push(value);
-            total += value.item.price * value.count;
+        if (isAuthenticated) {
+            let items = [];
+            let total = 0;
+            for (let i = 0; i < localStorage.length; i++) {
+                let key = localStorage.key(i);
+                let value = JSON.parse(localStorage.getItem(key));
+                items.push(value);
+                total += value.item.price * value.count;
+            }
+            setCartItems(items);
+            setTotalCost(total);
+        } else {
+            console.log("NOT AUTHENTICATED, redirecting to --> '/login'");
+            setRedirectTo('/login');
+            if (redirectTo) {
+                navigate(redirectTo);
+            }
         }
-        setCartItems(items);
-        setTotalCost(total);
-    }, []);
+    }, [isAuthenticated, navigate, redirectTo, setRedirectTo]);
 
     const clearLocalStorage = () => {
         localStorage.clear();
