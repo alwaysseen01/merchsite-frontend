@@ -23,7 +23,7 @@ html, body {
   z-index: 2;
 }
 
-@media screen and (max-width: 1015px) {
+@media screen and (max-width: 1350px) {
   .logoImage {
     position: relative !important;
     margin-left: auto;

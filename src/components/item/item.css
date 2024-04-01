@@ -8,12 +8,10 @@ html, body {
 
 .itemBox {
   display: grid;
-  flex-direction: column;
   position: relative;
   background-color: #202020;
   border: 1px solid #fdfdff;
   border-radius: 20px 5px 5px 5px;
-  flex-grow: 1;
   min-width: -moz-max-content;
   min-width: max-content;
   font-family: "IBM Plex Sans", sans-serif;
@@ -45,12 +43,18 @@ html, body {
   margin: 0;
   padding: 10px;
   text-align: center;
+  color: #202020;
   background-color: #fdfdff;
 }
-.itemBox .moreDetailsButton {
+.itemBox a {
+  display: grid;
   position: absolute;
   justify-self: center;
   align-self: center;
+  text-decoration: none;
+  color: inherit;
+}
+.itemBox .moreDetailsButton {
   padding: 15px 30px;
   font-size: 20px;
   border-radius: 5px;
