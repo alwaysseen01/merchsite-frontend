@@ -1,7 +1,8 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import { Link, useLocation } from "react-router-dom";
 import './navigation.css';
 import CategoryContext from "../../contexts/categoryContext";
+import cartIcon from './icons/cartIcon.png'
 
 const Navbar = () => {
   let location = useLocation();
@@ -26,6 +27,10 @@ const Navbar = () => {
           {categories.map((category) => (
               <Link to={`/${category.name}`} className={`navbar__element ${location.pathname === `/${category.name}` ? "active" : ""}`}><li>{category.name.toUpperCase()}</li></Link>
           ))}
+          <Link to='/cart' className={`navbar__element cartPage ${location.pathname === `/${'cart'}` ? "active" : ""}`}>
+            <li>MY CART</li>
+            <img src={cartIcon} className='cartIcon'></img>
+          </Link>
       </ul>
   );
 };

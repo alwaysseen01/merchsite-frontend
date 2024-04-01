@@ -25,7 +25,7 @@ const ItemsBox = ({categoryId}) => {
 
     if (loading) {
         return (
-            <div className="itemsWrapper">
+            <div className="itemsWrapper loading">
                 <div className="itemLoadingBox"></div>
                 <div className="itemLoadingBox"></div>
                 <div className="itemLoadingBox"></div>
@@ -55,7 +55,7 @@ const ItemsBox = ({categoryId}) => {
         <div className="itemsWrapper">
             {items.map(item => 
                 <Item
-                    key={item.id} 
+                    id={item.id} 
                     price={item.price} 
                     photo={item.photo} 
                     name={item.name} 
