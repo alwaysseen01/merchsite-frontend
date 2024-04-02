@@ -16,8 +16,14 @@ const Cart = () => {
         checkToken(localStorage.getItem('accessToken'), 'ACCESS');
         if (!localStorage.getItem('userData')) {
             setIsAuthenticated(false);
+            setRedirectTo('/login');
+            if (redirectTo) {
+                navigate(redirectTo);
+            }
         }
+    }, [])
 
+    useEffect(() => {
         if (isAuthenticated) {
             let items = [];
             let total = 0;
