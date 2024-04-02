@@ -8,15 +8,24 @@ import AuthContext from "../../contexts/authContext";
 const Cart = () => {
     const [cartItems, setCartItems] = useState([]);
     const [totalCost, setTotalCost] = useState(0);
-    const { isAuthenticated, setRedirectTo, redirectTo } = useContext(AuthContext);
+    const { isAuthenticated, setIsAuthenticated, setRedirectTo, redirectTo, checkToken } = useContext(AuthContext);
     const navigate = useNavigate();
+    const user = JSON.parse(localStorage.getItem('userData'));
 
     useEffect(() => {
+        checkToken(localStorage.getItem('accessToken'), 'ACCESS');
+        if (!localStorage.getItem('userData')) {
+            setIsAuthenticated(false);
+        }
+
         if (isAuthenticated) {
             let items = [];
             let total = 0;
             for (let i = 0; i < localStorage.length; i++) {
                 let key = localStorage.key(i);
+                if (key === 'accessToken' || key === 'refreshToken' || key === 'userData') {
+                    continue;
+                }
                 let value = JSON.parse(localStorage.getItem(key));
                 items.push(value);
                 total += value.item.price * value.count;
@@ -30,10 +39,18 @@ const Cart = () => {
                 navigate(redirectTo);
             }
         }
-    }, [isAuthenticated, navigate, redirectTo, setRedirectTo]);
+    }, [navigate, redirectTo]);
 
-    const clearLocalStorage = () => {
-        localStorage.clear();
+    const clearCart = () => {
+        setTotalCost(0);
+        let keysToRemove = [];
+        for (let i = 0; i < localStorage.length; i++) {
+            let key = localStorage.key(i);
+            if (key !== 'accessToken' && key !== 'refreshToken' && key !== 'userData') {
+                keysToRemove.push(key);
+            }
+        }
+        keysToRemove.forEach(key => localStorage.removeItem(key));  
         setCartItems([]);
     }
 
@@ -42,10 +59,9 @@ const Cart = () => {
             <div className="userDetailsBox">
                 <h1>User account details</h1>
                 <ul className="userData">
-                    <li className="userFirstName">Name: Igor</li>
-                    <li className="userLastName">Last name: Ruzhilov</li>
-                    <li className="userEmail">Email: iruzhilov@gmail.com</li>
-                    <li className="userPhoneNumber">Phone number: +7-708-353-14-19</li>
+                <li className="userFirstName">Name: {user && user.fname}</li>
+                <li className="userLastName">Last name: {user && user.lname}</li>
+                <li className="userEmail">Email: {user && user.email}</li>
                 </ul>
                 <ul className="deliveryDetailsBox">
                     <li className="userDeliveryAddress">Delivery address: Almaty City, Altai-2 mcd. 45 h. apt. 4</li>
@@ -73,9 +89,9 @@ const Cart = () => {
                     <p style={{width: "100%", color: "grey"}}>It looks empty here...</p>
                 )}
             </div>
-            <h1 style={{marginTop: "80px"}}>Total cost of all items: {totalCost}$</h1>
+            <h1 className="cartTotalCost" style={{marginTop: "80px"}}>Total cost of all items: {totalCost}$</h1>
             <div className="cartMenuWrapper">
-                <button className="clearCartButton" onClick={clearLocalStorage}>CLEAR CART</button>
+                <button className="clearCartButton" onClick={clearCart}>CLEAR CART</button>
                 <button className="orderNowButton">ORDER NOW</button>
             </div>
         </div>

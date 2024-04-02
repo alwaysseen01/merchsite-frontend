@@ -9,7 +9,7 @@ const ItemDetails = () => {
     const [count, setCount] = useState(0);
     const [isAdding] = useState(false);
 
-    const { isAuthenticated, setRedirectTo, redirectTo } = useContext(AuthContext);
+    const { isAuthenticated, setIsAuthenticated, setRedirectTo, redirectTo, checkToken } = useContext(AuthContext);
     const navigate = useNavigate();
 
     const handleMinusClick = () => {
@@ -26,6 +26,11 @@ const ItemDetails = () => {
 
     const handleAddToCart = () => {
         if (count > 0 && count <= item.quantity) {
+            checkToken(localStorage.getItem('accessToken'), 'ACCESS');
+            if (!localStorage.getItem('userData')) {
+                setIsAuthenticated(false);
+            }
+
             if (isAuthenticated) {
                 console.log("AUTHENTICATED, proceed operation");
     

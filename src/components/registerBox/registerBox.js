@@ -15,11 +15,13 @@ const RegisterBox = () => {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        const firstName = event.target.elements.firstName.value;
-        const lastName = event.target.elements.lastName.value;
+        const fname = event.target.elements.fname.value;
+        const lname = event.target.elements.lname.value;
         const email = event.target.elements.email.value;
         const password = event.target.elements.password.value;
         const confirmPassword = event.target.elements.confirmPassword.value;
+        // TODO: change hard-coded 'USER' here to default db value
+        const role = "USER";
 
         if (password !== confirmPassword) {
             setErrorMessage("Passwords do not match.");
@@ -27,7 +29,14 @@ const RegisterBox = () => {
         }
 
         try {
-            await register(firstName, lastName, email, password);
+            console.log(`USER DATA while trying to register: 
+            First Name: ${fname}
+            Last Name: ${lname}
+            Email: ${email}
+            Password: ${password}
+            Role: ${role}`);
+
+            await register(fname, lname, email, password, role);
         } catch (error) {
             console.error('Error registering:', error);
             setErrorMessage("Error registering. Please, try again later.");
@@ -39,8 +48,8 @@ const RegisterBox = () => {
             <div className='registerFormBox'>
                 <h1 className='registerFormBoxTitle'>Registration</h1>
                 <form className='registerForm' onSubmit={handleSubmit}>
-                    <input type='text' name='firstName' placeholder='Enter your first name' required />
-                    <input type='text' name='lastName' placeholder='Enter your last name' required />
+                    <input type='text' name='fname' placeholder='Enter your first name' required />
+                    <input type='text' name='lname' placeholder='Enter your last name' required />
                     <input type='email' name='email' placeholder='Enter your email' required />
                     <input type='password' name='password' placeholder='Imagine your new password' required />
                     <input type='password' name='confirmPassword' placeholder='Repeat your new password' required />
